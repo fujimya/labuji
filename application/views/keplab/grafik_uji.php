@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Uji Lab</h1>
+            <h1>Dashboard</h1>
           </div>
           
         </div>
@@ -14,55 +14,57 @@
 
     <!-- Main content -->
     <section class="content">
-      <form action="<?php echo base_url(); ?>Grafik/FilterUji" method="post" >
-        <table>
-          <tr>
-            <td>
-              <div class="input-group mb-3">
-               <div class="form-group">
-                <label>Tanggal Mulai:</label>
 
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                  </div>
-                  <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask id="tanggal_mulai" name="tanggal_mulai">
-                </div>
-                <!-- /.input group -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <!-- BAR CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Pendapatan Per Item Uji</h3>
+
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="input-group mb-3">
-             <div class="form-group">
-              <label>Tanggal Selesai:</label>
 
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                </div>
-                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask id="tanggal_selesai" name="tanggal_selesai">
-              </div>
-              <!-- /.input group -->
-            </div>
-          </div>
-        </td>
-        <td><button type="submit" class="btn btn-primary">Filter</button></td>
-      </tr></table>
+              <div class="card-body">
+                <form action="<?php echo base_url(); ?>Grafik/FilterUji" method="post" >
+                  <table>
+                    <tr>
+                      <td>
+                        <div class="input-group mb-3">
+                         <div class="form-group">
+                          <label>Tanggal Mulai:</label>
 
-    </form>
-    <div class="container-fluid">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- general form elements disabled -->
-          <!-- BAR CHART -->
-          <div class="card card-success">
-            <div class="card-header">
-              <h3 class="card-title">Pendapatan Per Item Uji</h3>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask id="tanggal_mulai" name="tanggal_mulai">
+                          </div>
+                          <!-- /.input group -->
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group mb-3">
+                       <div class="form-group">
+                        <label>Tanggal Selesai:</label>
 
-            </div>
-            <div class="card-body">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          </div>
+                          <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask id="tanggal_selesai" name="tanggal_selesai">
+                        </div>
+                        <!-- /.input group -->
+                      </div>
+                    </div>
+                  </td>
+                  <td><button type="submit" class="btn btn-primary">Filter</button></td>
+                </tr></table>
+
+              </form>
               <div class="chart">
                 <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
@@ -73,11 +75,57 @@
 
         </div>
         <!--/.col (right) -->
+
+        <!-- right column -->
+        <div class="col-md-6" >
+          <!-- general form elements disabled -->
+          <!-- BAR CHART -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Kategori Uji</h3>
+
+            </div>
+
+            <div class="card-body">
+             
+            <div class="chart">
+              <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+
+
       </div>
-      <!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
+      <!--/.col (right) -->
+
+      <!-- right column -->
+        <div class="col-md-6" >
+          <!-- general form elements disabled -->
+          <!-- BAR CHART -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Perusahaan Uji</h3>
+
+            </div>
+
+            <div class="card-body">
+             
+            <div class="chart">
+              <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+
+
+      </div>
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 
 
@@ -132,7 +180,7 @@
 
  
 
-<script>
+ <script>
   $(function () {
 
     var areaChartData = {
@@ -197,10 +245,103 @@
     }
 
     var barChart = new Chart(barChartCanvas, {
-      type: 'bar', 
+      type: 'line', 
       data: barChartData,
       options: barChartOptions
     });
+
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+
+    var donutData        = {
+      labels: [<?php foreach ($uji as $id) {
+        $nama = $this->db->query("select * from tbl_harga_uji where id = '".$id."';")->result();
+        //print_r($nama);
+        $getnama = "";
+        foreach ($nama as $nm) {
+          $getnama = $nm->kategori;
+        }
+        echo "'".$getnama."',";
+      } ?>],
+      datasets: [
+        {
+          data: [<?php $a = 0; foreach ($uji as $id) {
+          $total = $this->db->query("select * from tbl_harga_uji where id = '".$id."';")->result();
+        //print_r($nama);
+          $gettotal = "";
+          foreach ($nama as $nm) {
+            $gettotal = $jumlah[$a];
+          }
+          echo $gettotal.",";
+          $a++;
+        } ?>],
+        backgroundColor : [<?php $a = 0; foreach ($uji as $id) {
+          echo "'#" . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT)."',";
+        } ?>],
+        }
+      ]
+    }
+
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = donutData;
+    var pieOptions     = {
+      maintainAspectRatio : true,
+      responsive : true,
+      legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+
+            }
+        }
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions      
+    })
+
+
+     //-------------
+    //- LINE CHART -
+    //--------------
+
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
+
+    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+    var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
+    var lineChartData = jQuery.extend(true, {}, areaChartData)
+    lineChartData.datasets[0].fill = false;
+    lineChartOptions.datasetFill = false
+
+    var lineChart = new Chart(lineChartCanvas, { 
+      type: 'line',
+      data: lineChartData, 
+      options: lineChartOptions
+    })
 
     
   })

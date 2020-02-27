@@ -156,6 +156,18 @@ class KepalaLab extends CI_Controller {
 		}
 		$data['uji'] = $id_uj;
 		$data['jumlah'] = $jumlah;
+
+		$pel = $this->db->query("SELECT DISTINCT id_pelanggan FROM tbl_uji;")->result();
+		$id_pel = array();
+		$jumpel = array();
+		foreach ($pel as $amp) {
+			$hitung = $this->db->query("SELECT * FROM tbl_uji where id_pelanggan = '".$amp->id_pelanggan."';")->num_rows();
+			array_push($id_pel,$amp->id_pelanggan);
+			array_push($jumpel,$hitung);
+		}
+		$data['id_pelanggan'] = $id_pel;
+		$data['jumpel'] = $jumpel;
+		
 		// print_r($id_uj);
 		$this->load->view('keplab/header_keplab');
 		$this->load->view('keplab/grafik_uji',$data);
@@ -174,8 +186,12 @@ class KepalaLab extends CI_Controller {
 		}
 		$data['uji'] = $id_uj;
 		$data['jumlah'] = $jumlah;
+
+
 		// print_r($id_uj);
 		$this->load->view('keplab/header_keplab');
 		$this->load->view('keplab/grafik_uji',$data);
 	}
+
+	
 }
